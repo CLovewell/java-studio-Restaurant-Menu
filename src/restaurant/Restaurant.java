@@ -30,9 +30,5 @@ public class Restaurant {
         for (MenuItem item : foodItems) {
             System.out.println(item.getCategory());
         }
-
-        System.out.println(menu.daysSinceLastUpdate());
-        menu.setLastUpdated(LocalDate.now().minusDays(900));
-        System.out.println(menu.daysSinceLastUpdate());
     }
 }

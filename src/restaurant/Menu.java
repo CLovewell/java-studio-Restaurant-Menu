@@ -38,19 +38,18 @@ public class Menu {
 
     public int daysSinceLastUpdate() {
         LocalDate today = LocalDate.now();
-        //TODO: account for leap years
-        int leapYearCount = 0;
-        for (int i = lastUpdated.getYear(); i < today.getYear(); i++) {
-            if (Year.of(i).isLeap()) {
-                leapYearCount++;
+        int dayCount = 0;
+        if (today.getYear() == lastUpdated.getYear()) {
+            dayCount = today.getDayOfYear() - lastUpdated.getDayOfYear();
+        }
+        else {
+            dayCount += lastUpdated.lengthOfYear() - lastUpdated.getDayOfYear();
+            for (int i = lastUpdated.getYear() + 1; i < today.getYear(); i++) {
+                dayCount += Year.of(i).length();
             }
+            dayCount += today.getDayOfYear();
         }
-        if (lastUpdated.isLeapYear() && lastUpdated.getDayOfYear() >= 60) {
-            leapYearCount--;
-        }
-        return (today.getYear() - lastUpdated.getYear()) * 365
-                + today.getDayOfYear() - lastUpdated.getDayOfYear()
-                + leapYearCount;
+        return dayCount;
     }
 
     public void setLastUpdated(LocalDate date) {
