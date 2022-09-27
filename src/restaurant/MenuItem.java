@@ -1,9 +1,10 @@
 package restaurant;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class MenuItem {
     public static final String[] categories = {"appetizer", "main course", "dessert"};
-    public static final long newCap = 60; //number of days a menu item can be considered new
+    public static final int newCap = 60; //number of days a menu item can be considered new
     private double price;
     private String description;
     private int category;
@@ -47,19 +48,17 @@ public class MenuItem {
     }
 
     public void setCategory(String category) {
-        switch (category) {
-            case "appetizer":
-                this.category = 0;
+        int i;
+        for (i = 0; i < categories.length; i++) {
+            if (categories[i].equals(category)) {
+                this.category = i;
                 break;
-            case "main course":
-                this.category = 1;
-                break;
-            case "dessert":
-                this.category = 2;
-                break;
-            default:
-                System.err.print("Invalid menu item category");
-                break;
+            }
+        }
+        if (i == categories.length) {
+            System.err.println("Invalid category assigned to " +
+                    this.toString());
+            this.category = -1;
         }
     }
 
@@ -100,4 +99,19 @@ public class MenuItem {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MenuItem menuItem = (MenuItem) o;
+        return category == menuItem.category &&
+                Objects.equals(name, menuItem.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(category, name);
+    }
+
 }

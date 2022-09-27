@@ -21,14 +21,12 @@ public class Restaurant {
                         " is seasoned with just the right amount of cilantro.",
                 1,
                 "Chicken alfredo"));
-        menu.add(new MenuItem(0.99,
+        MenuItem nonsense = new MenuItem(0.99,
                 "not a food",
                 3,
-                "nonsense"));
-        menu.remove("nonsense");
+                "nonsense");
+        menu.add(nonsense);
         menu.print();
-        for (MenuItem item : foodItems) {
-            System.out.println(item.getCategory());
-        }
+        nonsense.print();
     }
 }
