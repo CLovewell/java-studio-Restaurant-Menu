@@ -13,8 +13,14 @@ public class Menu {
     }
 
     public void add(MenuItem item) {
-        menuItems.add(item);
-        lastUpdated = LocalDate.now();
+        if (menuItems.contains(item)){
+            System.err.println("Cannot add duplicate menu item: " +
+                    item.toString());
+        }
+        else {
+            menuItems.add(item);
+            lastUpdated = LocalDate.now();
+        }
     }
 
     public void remove(MenuItem item) {

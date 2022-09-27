@@ -28,5 +28,11 @@ public class Restaurant {
         menu.add(nonsense);
         menu.print();
         nonsense.print();
+        menu.remove(nonsense);
+        menu.add(new MenuItem(1.99,
+                "Fried breaded cow juice.",
+                0,
+                "Cheese curds"));
+        menu.print();
     }
 }
